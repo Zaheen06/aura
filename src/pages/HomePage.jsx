@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import { getProducts } from '../api/productApi';
@@ -49,100 +49,82 @@ export default function HomePage({ onProductClick, onAddToCart }) {
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [recommenderOpen, setRecommenderOpen] = useState(false);
 
-  const [scrollY, setScrollY] = useState(0);
-
-  // Mouse parallax only — no state needed now, handled via ref or dropped
-  const handleMouseMove = useCallback(() => {
-    // parallax handled via scrollY only; mouse state removed
-  }, []);
-
-  useEffect(() => {
-    const onScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    let raf;
-const move = (e) => {
-  cancelAnimationFrame(raf);
-  raf = requestAnimationFrame(() => handleMouseMove(e));
-};
-
-window.addEventListener("mousemove", move, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('mousemove', move);
-    };
-  }, [handleMouseMove]);
-
   useEffect(() => {
     getProducts().then((data) => { setProducts(data); setLoadingProducts(false); });
   }, []);
 
-
   return (
     <main id="main-content">
       {/* ══ HERO ══════════════════════════════════════════════ */}
-      <section id="hero" style={{ overflow: 'hidden' }}>
-        <div className="hero-bg" style={{ transform: `translateY(${scrollY * 0.3}px)` }} />
+      <section id="hero">
+        <div className="hero-bg" />
+        {/* Hero bottom gradient fade to dark */}
+        <div className="hero-fade-bottom" />
 
-        <div className="hero-eyebrow">Premium Audio · Est. 2024</div>
+        {/* ── LEFT column ── */}
+        <div className="hero-left">
+          <div className="hero-eyebrow">Premium Audio · Est. 2024</div>
 
-        <h1 className="hero-title" style={{ transform: `translateY(${scrollY * 0.15}px)` }}>
-          <span>Hear</span>
-          <span>Everything.</span>
-        </h1>
+          <h1 className="hero-title">
+            <span>Hear</span>
+            <span>Everything.</span>
+          </h1>
 
-        <p className="hero-sub" style={{ transform: `translateY(${scrollY * 0.1}px)` }}>
-          Three headphones. One obsession. Sound engineered to make you feel every frequency your music intended.
-        </p>
+          <p className="hero-sub">
+            Three headphones. One obsession. Sound engineered to make you feel every frequency your music intended.
+          </p>
 
-        <div
-  className="hero-glow"
-  style={{
-    background:
-      "radial-gradient(circle, rgba(255,215,120,0.12) 0%, transparent 70%)"
-  }}
-/>
+          {/* Trust signal */}
+          <div className="hero-trust">
+            <span className="hero-trust-stars">★★★★★</span>
+            <span className="hero-trust-text">4.9 · Trusted by <strong>40,000+</strong> audiophiles</span>
+          </div>
 
-       <img
-  src="/nova_gold.png"
-  alt="AURA NOVA X headphone"
-  className="hero-product-img"
-  style={{
-    transform: `translateX(-50%) translateY(${scrollY * 0.08}px)`,
-    transition: 'transform 0.6s var(--ease)',
-  }}
-  loading="lazy"
-  decoding="async"
-/>
+          <div className="hero-cta-row">
+            <a
+              className="hero-cta"
+              href="#products"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              <span>Explore Collection</span>
+              <span className="hero-cta-arrow">→</span>
+            </a>
+            <button className="hero-cta-secondary" onClick={() => setRecommenderOpen(true)}>
+              🎧 Find My Headphone
+            </button>
+          </div>
 
-        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
-         <a
-  className="hero-cta"
-  href="#products"
-  onClick={(e) => {
-    e.preventDefault();
-    document.getElementById("products")?.scrollIntoView({
-      behavior: "smooth"
-    });
-  }}
->Explore Collection ↓</a>
-          <button className="hero-cta-secondary" onClick={() => setRecommenderOpen(true)}>
-            🎧 Find My Headphone
-          </button>
+          {/* Award strip — frosted glass pill row */}
+          <div className="hero-awards" role="list" aria-label="Awards and recognition">
+            {AWARD_STRIP.map((a) => (
+              <div key={a.outlet} className="hero-award-item" role="listitem">
+                <span className="hero-award-outlet">{a.outlet}</span>
+                <span className="hero-award-name">{a.award}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Award strip */}
-        <div className="hero-awards" role="list" aria-label="Awards and recognition">
-          {AWARD_STRIP.map((a) => (
-            <div key={a.outlet} className="hero-award-item" role="listitem">
-              <span className="hero-award-outlet">{a.outlet}</span>
-              <span className="hero-award-name">{a.award}</span>
-            </div>
-          ))}
-        </div>
-
-        <div className="scroll-hint">
-          <span>Scroll</span>
-          <div className="scroll-line" />
+        {/* ── RIGHT column ── */}
+        <div className="hero-right">
+          <div
+            className="hero-glow"
+            style={{ background: 'radial-gradient(circle, rgba(230,195,100,0.22) 0%, rgba(192,132,252,0.09) 45%, transparent 70%)' }}
+          />
+          {/* Pulsing rings */}
+          <div className="hero-ring hero-ring--1" />
+          <div className="hero-ring hero-ring--2" />
+          <div className="hero-ring hero-ring--3" />
+          <img
+            src="/nova_gold.png"
+            alt="AURA NOVA X headphone"
+            className="hero-product-img"
+            loading="eager"
+            decoding="async"
+          />
         </div>
       </section>
 
@@ -151,7 +133,7 @@ window.addEventListener("mousemove", move, { passive: true });
         <div className="stats-bar-inner">
           {STATS.map((s, i) => (
             <ScrollReveal key={s.label} delay={i * 80}>
-              <div className="stat-divider-cell" style={{ padding: '0 2rem', textAlign: 'center' }}>
+              <div className="stat-divider-cell" style={{ padding: '0 3rem', textAlign: 'center' }}>
                 <StatItem val={s.val} label={s.label} />
               </div>
             </ScrollReveal>

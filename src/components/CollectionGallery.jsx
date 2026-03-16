@@ -57,41 +57,12 @@ function ColorThumb({ item, active, accent, onClick }) {
 
 // ─── Hero card (large featured view) ───────────────────────────────────────
 function HeroCard({ item, model, onOpen }) {
-  const cardRef = useRef(null);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const rafRef = useRef(null);
-
-  const handleMouseMove = useCallback((e) => {
-    if (!cardRef.current) return;
-    cancelAnimationFrame(rafRef.current);
-    rafRef.current = requestAnimationFrame(() => {
-      const rect = cardRef.current.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const dx = ((e.clientX - cx) / (rect.width / 2)) * 8;
-      const dy = ((e.clientY - cy) / (rect.height / 2)) * -6;
-      setTilt({ x: dx, y: dy });
-    });
-  }, []);
-
-  const resetTilt = useCallback(() => {
-    cancelAnimationFrame(rafRef.current);
-    setTilt({ x: 0, y: 0 });
-  }, []);
-
-  // Cancel RAF on unmount
-  useEffect(() => () => cancelAnimationFrame(rafRef.current), []);
-
   return (
     <div
-      ref={cardRef}
       className="cg-hero-card"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={resetTilt}
       style={{
         '--accent': model.accentHex,
         '--accent-rgb': model.accentRgb,
-        transform: `perspective(1000px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg)`,
       }}
       onClick={onOpen}
       role="button"
@@ -109,9 +80,6 @@ function HeroCard({ item, model, onOpen }) {
         className="cg-hero-card__img"
         loading="eager"
         decoding="async"
-        style={{
-          transform: `translateX(${tilt.x * -0.5}px) translateY(${tilt.y * -0.5}px) scale(1.04)`,
-        }}
       />
 
       {/* Bottom info */}
