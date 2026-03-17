@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 // Routing
 import AppRoutes from './routes/AppRoutes';
 
-// Reusable components
+//components
 import Navbar from './components/Navbar';
 import SidePanel from './components/SidePanel';
 import ScrollToTop from './components/ScrollToTop';

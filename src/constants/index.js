@@ -31,18 +31,19 @@ export const BRAND_FEATURES = [
     title: 'Free Worldwide Shipping',
     desc: 'Every AURA order ships free with full tracking and 30-day hassle-free returns.',
   },
+  {
+    icon: '⚡',
+    title: 'Next-Gen Connectivity',
+    desc: 'Equipped with Bluetooth 5.4 and LE Audio. Connect to multiple devices seamlessly with zero dropout.',
+  },
+  {
+    icon: '🌱',
+    title: 'Sustainable Craftsmanship',
+    desc: 'Designed with 100% recycled aluminum and plastic-free packaging. Premium sound with a conscience.',
+  },
 ];
 
-export const GALLERY_ITEMS = [
-  { src: '/nova_gold.png',      label: 'NOVA X — Gold', category: 'NOVA X', productId: 'nova' },
-  { src: '/nova_cognac.png',    label: 'NOVA X — Cognac', category: 'NOVA X', productId: 'nova' },
-  { src: '/pulse_graphite.png', label: 'PULSE — Graphite', category: 'PULSE', productId: 'pulse' },
-  { src: '/pulse_walnut.png',   label: 'PULSE — Walnut', category: 'PULSE', productId: 'pulse' },
-  { src: '/pulse_sky.png',      label: 'PULSE — Sky', category: 'PULSE', productId: 'pulse' },
-  { src: '/arc_phantom.png',    label: 'ARC — Phantom', category: 'ARC', productId: 'arc' },
-  { src: '/arc_chalk.png',      label: 'ARC — Chalk', category: 'ARC', productId: 'arc' },
-  { src: '/arc_forest.png',     label: 'ARC — Forest', category: 'ARC', productId: 'arc' },
-];
+
 
 export const NAV_LINKS = [
   { label: 'Collection', href: '/#products' },

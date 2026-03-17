@@ -20,8 +20,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import SoundViz from '../components/SoundViz';
 import SkeletonLoader from '../components/SkeletonLoader';
 import GalleryCard from '../components/GalleryCard';
-
-
+import Footer from '../components/Footer';
 // ── Internal 3D scene ── (self-contained, not exported)
 function ShowcaseGeometry({ product, activeColor }) {
   const meshRef  = useRef(); const wireRef  = useRef();
@@ -271,6 +270,8 @@ export default function ShowcasePage({ product, isOpen, onClose, onAddToCart }) 
           </div>
 
           <div style={{ height: '6rem' }} />
+          {/* ── FOOTER ── */}
+          <Footer />
         </>
       )}
     </div>

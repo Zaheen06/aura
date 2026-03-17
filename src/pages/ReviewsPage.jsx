@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import ScrollReveal from '../components/ScrollReveal';
+import Footer from '../components/Footer';
 
 const REVIEWS = [
   {
@@ -227,6 +228,9 @@ export default function ReviewsPage() {
         </ScrollReveal>
         <div className="about-cta-glow" />
       </section>
+
+      {/* ── FOOTER ── */}
+      <Footer />
     </div>
   );
 }

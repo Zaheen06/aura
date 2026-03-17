@@ -1371,7 +1371,7 @@ nav{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:2rem;
-  padding:3rem 0;
+  padding:2rem 0; /* Reduced from 3rem */
   border-top:1px solid rgba(255,255,255,.06);
   border-bottom:1px solid rgba(255,255,255,.06);
 }
@@ -2096,7 +2096,7 @@ nav{
    FEATURES SECTION
 ══════════════════════════════ */
 .features-section {
-  padding:6rem 3rem;
+  padding: 4rem 3rem 1rem; /* Minimized vertical padding */
   background:linear-gradient(to bottom, rgba(255,255,255,0.01), transparent);
 }
 
@@ -2124,7 +2124,7 @@ nav{
 ══════════════════════════════ */
 .cta-banner {
   position:relative;
-  padding:8rem 3rem;
+  padding: 2.5rem 2rem; /* Minimized padding */
   text-align:center;
   overflow:hidden;
   border-top:1px solid var(--border);
@@ -2170,7 +2170,7 @@ nav{
    FOOTER
 ══════════════════════════════ */
 .site-footer {
-  padding:4rem 3rem 2rem;
+  padding: 1.5rem 3rem; /* Minimized top/bottom padding */
   max-width:1300px;
   margin:0 auto;
 }

@@ -1,4 +1,5 @@
 import ScrollReveal from '../components/ScrollReveal';
+import Footer from '../components/Footer';
 
 const TECH_PILLARS = [
   {
@@ -149,6 +150,9 @@ export default function TechPage() {
         </ScrollReveal>
         <div className="about-cta-glow" />
       </section>
+
+      {/* ── FOOTER ── */}
+      <Footer />
     </div>
   );
 }

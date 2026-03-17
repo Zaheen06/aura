@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import ScrollReveal from '../components/ScrollReveal';
+import Footer from '../components/Footer';
 
 /* ── Data ─────────────────────────────────────────────────── */
 const TIMELINE = [
@@ -349,6 +350,8 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ── FOOTER ── */}
+      <Footer />
     </div>
   );
 }
